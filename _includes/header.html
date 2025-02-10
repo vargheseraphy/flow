@@ -10,11 +10,12 @@
       <ul class="menu">
         {% for item in site.navigation %}
         {% assign current = nil %}
-        {% if page.url == item.url %}
-        {% assign current = 'nav-current' %}
+        {% assign page_path = page.url | remove: site.baseurl %}
+        {% if page_path == item.url %}
+          {% assign current = 'nav-current' %}
         {% endif %}
         <li class="menu-item {{ current }}">
-          <a class="{{ current }}" href="{{ item.url }}">{{ item.text }}</a>
+          <a class="{{ current }}" href="{{ site.baseurl }}{{ item.url }}">{{ item.text }}</a>
         </li>
         {% endfor %}
       </ul><!-- .menu -->

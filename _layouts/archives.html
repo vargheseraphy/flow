@@ -1,0 +1,34 @@
+---
+layout: default
+---
+
+<main class="site-main fadeInDown delay_075s">
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">Archive by Year</h1>
+    </header><!-- .post-header -->
+    <div class="post-content">
+      {% assign posts_by_year = site.posts | group_by_exp: "post", "post.date | date: '%Y'" %}
+      {% for year_group in posts_by_year %}
+        <h2 id="{{ year_group.name }}">{{ year_group.name }}</h2>
+        <ul class="archive-post-list">
+        {% assign posts_sorted = year_group.items | sort: "date" | reverse %}
+        {% for post in posts_sorted %}
+          <li>
+            <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a> 
+            <span class="archive-meta"> 
+              — <time class="archive-date" datetime="{{ post.date | date: "%Y-%m-%d" }}">{{ post.date | date: "%B %-d, %Y" }}</time>
+              <span class="post-tags">
+                {% for tag in post.tags %}
+                  <a href="{{ site.baseurl }}/tags/{{ tag | cgi_escape }}/">{{ tag }}</a>{% unless forloop.last %}, {% endunless %}
+                {% endfor %}
+              </span>
+            </span>
+          </li>
+        {% endfor %}
+        </ul><!-- .archive-post-list -->
+        <p><a href="#top" class="archive-top-link">Return to top &#8593;</a></p>
+      {% endfor %}
+    </div><!-- .post-content -->
+  </article><!-- .post -->
+</main><!-- .site-main -->

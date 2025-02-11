@@ -1,3 +1,4 @@
+
 <header class="site-header">
   {% if page.url == "/" %}
   <h1 class="site-title"><a class="logo-text" href="{{ site.baseurl }}/">{{site.title}}</a></h1>
@@ -10,12 +11,11 @@
       <ul class="menu">
         {% for item in site.navigation %}
         {% assign current = nil %}
-        {% assign page_path = page.url | remove: site.baseurl %}
-        {% if page_path == item.url %}
-          {% assign current = 'nav-current' %}
+        {% if page.url == item.url %}
+        {% assign current = 'nav-current' %}
         {% endif %}
         <li class="menu-item {{ current }}">
-          <a class="{{ current }}" href="{{ site.baseurl }}{{ item.url }}">{{ item.text }}</a>
+          <a class="{{ current }}" href="{{ item.url }}">{{ item.text }}</a>
         </li>
         {% endfor %}
       </ul><!-- .menu -->
